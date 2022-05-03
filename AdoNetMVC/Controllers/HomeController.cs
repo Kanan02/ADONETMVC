@@ -1,4 +1,5 @@
 ﻿using AdoNetMVC.Models;
+using AdoNetMVC.Models.Concrete;
 using AdoNetMVC.Services.Interfaces;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;
@@ -19,10 +20,20 @@ namespace AdoNetMVC.Controllers
             _logger = logger;
             _bookService=bookService;
         }
-
+        [HttpGet]
         public async Task<IActionResult> Index()
         {
-            return View(await _bookService.GetBook(1));
+            return View(await _bookService.GetBooks());
+        }
+        [HttpGet]
+        public IActionResult AddBook()
+        {
+            return View();
+        }
+        [HttpPost]
+        public async Task<IActionResult> AddBook(Book book)
+        {
+            return View(await _bookService.AddBook(book));
         }
 
         public IActionResult Privacy()

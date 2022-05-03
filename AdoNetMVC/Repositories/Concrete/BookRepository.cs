@@ -17,9 +17,23 @@ namespace AdoNetMVC.Repositories.Concrete
         {
             _connection = BooksContext.GetConnection();
         }
-        public Task<int> Add(Book entity)
+        public async Task<int> Add(Book entity)
         {
-            throw new System.NotImplementedException();
+            using (IDbConnection db = _connection)
+            {
+                string query = @"insert into Books(Name,Pages,Price,Stock) values (@Name,@Pages,@Price,@Stock)";
+                return await db.ExecuteAsync(query,
+                    new
+                    {
+                        entity.Name,
+                        entity.Pages,
+                        entity.Price,
+                        entity.Stock
+                    }
+                    );
+
+            }
+
         }
 
         public Task<int> Delete(int id)
@@ -73,9 +87,13 @@ namespace AdoNetMVC.Repositories.Concrete
             //}
         }
 
-        public Task<IEnumerable<Book>> Get()
+        public async Task<IEnumerable<Book>> Get()
         {
-            throw new System.NotImplementedException();
+            using (IDbConnection db = _connection)
+            {
+                string query = @"Select * from Books";
+                return await db.QueryAsync<Book>(query);
+            }
         }
     }
 }

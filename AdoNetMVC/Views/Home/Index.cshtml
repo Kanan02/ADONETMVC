@@ -1,9 +1,13 @@
 ﻿
-@model Book
+@model List<Book>
 @{
     ViewData["Title"] = "Home Page";
 }
-
+<a href='@Url.Action("AddBook","Home")'>Add Book</a>
 <div class="text-center">
-    <h1>@Model.Name</h1>
+    @for (var i = 0; i < @Model.Count; i++)
+    {
+       <span>@Model[i].Name </span><a href='@Url.Action("DeleteBook","Home",new {id=@Model[i].Id})'>Delete Book</a>
+    }
 </div>
+

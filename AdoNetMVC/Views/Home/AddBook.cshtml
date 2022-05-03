@@ -1,0 +1,47 @@
+﻿@*
+    For more information on enabling MVC for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
+    
+*@
+    @model Book
+
+@{
+    @using (Html.BeginForm("AddBook", "Home", FormMethod.Post))
+    {
+        <table cellpadding="0" cellspacing="0">
+            <tr>
+                <th colspan="2" align="center">Person Details</th>
+            </tr>
+            <tr>
+                <td>Name: </td>
+                <td>
+                    @Html.TextBoxFor(m => m.Name)
+                </td>
+            </tr>
+           
+
+            <tr>
+                <td>Pages: </td>
+                <td>
+                    @Html.TextBoxFor(m => m.Pages)
+                </td>
+            </tr>
+              <tr>
+                <td>Price: </td>
+                <td>
+                    @Html.TextBoxFor(m => m.Price)
+                </td>
+            </tr>
+              <tr>
+                <td>Stock: </td>
+                <td>
+                    @Html.TextBoxFor(m => m.Stock)
+                </td>
+            </tr>
+           
+            <tr>
+                <td></td>
+                <td><input type="submit" value="Submit"/></td>
+            </tr>
+        </table>
+      }
+}
